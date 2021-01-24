@@ -23,4 +23,11 @@ public class ProductService {
 		return list.stream().map(p -> new ProductDTO(p)).collect(Collectors.toList());
 	}
 
+	@Transactional
+    public ProductDTO insert(ProductDTO dto) {
+    	Product obj = new Product().fromDto(dto);
+    	obj = repository.save(obj);
+
+    	return new ProductDTO(obj);
+	}
 }

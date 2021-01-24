@@ -1,5 +1,7 @@
 package com.devsuperior.dsdeliver.entities;
 
+import com.devsuperior.dsdeliver.dtos.ProductDTO;
+
 import java.io.Serializable;
 
 import javax.persistence.Entity;
@@ -97,4 +99,8 @@ public class Product implements Serializable {
 			return false;
 		return true;
 	}
+
+    public Product fromDto(ProductDTO dto) {
+		return new Product(dto.getId(), dto.getName(), dto.getPrice(), dto.getDescription(), dto.getImageUri());
+    }
 }

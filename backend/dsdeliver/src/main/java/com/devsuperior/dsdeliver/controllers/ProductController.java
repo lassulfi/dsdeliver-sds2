@@ -3,6 +3,7 @@ package com.devsuperior.dsdeliver.controllers;
 import java.net.URI;
 import java.util.List;
 
+import com.devsuperior.dsdeliver.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,6 +32,17 @@ public class ProductController {
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 
 		return ResponseEntity.created(uri).build();
+	}
+
+	@PutMapping(value = "/{id}")
+	public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody ProductDTO dto) {
+		try {
+			dto.setId(id);
+			service.update(dto);
+			return ResponseEntity.noContent().build();
+		} catch (ObjectNotFoundException e) {
+			return ResponseEntity.notFound().build();
+		}
 	}
 
 }

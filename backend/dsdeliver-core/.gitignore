@@ -1,0 +1,14 @@
+# VSCode
+.vscode
+
+# target folder
+target
+
+# Classpath
+.classpath
+
+# Project
+.project
+
+#Settings
+.settings

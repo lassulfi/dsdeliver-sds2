@@ -79,6 +79,10 @@ public class Order implements Serializable {
     public Set<Product> getProducts() {
         return products;
     }
+
+    public void addProduct(Product product) {
+        products.add(product);
+    }
     
     @Override
     public int hashCode() {

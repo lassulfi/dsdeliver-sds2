@@ -1,10 +1,8 @@
 package com.devsuperior.dsdeliver.core.usecases;
 
-import java.time.Instant;
 import java.util.Set;
 
 import com.devsuperior.dsdeliver.core.entities.Order;
-import com.devsuperior.dsdeliver.core.entities.OrderStatus;
 import com.devsuperior.dsdeliver.core.entities.Product;
 import com.devsuperior.dsdeliver.core.exceptions.ProductNotFoundException;
 import com.devsuperior.dsdeliver.core.ports.CreateNewOrderDao;
@@ -24,7 +22,7 @@ public class CreateNewOrder {
         Order order = new Order(null, address, latitude, longitude);
         for(Product p : products) {
             Product product = findProductByIdDao.findById(p.getId()).orElseThrow(() -> new ProductNotFoundException("Product not found. Id: " + p.getId()));
-            order.getProducts().add(product);
+            order.addProduct(product);
         }
         return createNewOrderDao.create(order);
     }

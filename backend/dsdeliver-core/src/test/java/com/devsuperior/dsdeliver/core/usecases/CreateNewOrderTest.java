@@ -11,6 +11,7 @@ import java.util.Set;
 
 import com.devsuperior.dsdeliver.core.entities.Order;
 import com.devsuperior.dsdeliver.core.entities.Product;
+import com.devsuperior.dsdeliver.core.exceptions.GenericException;
 import com.devsuperior.dsdeliver.core.exceptions.ProductNotFoundException;
 import com.devsuperior.dsdeliver.core.ports.CreateNewOrderDao;
 import com.devsuperior.dsdeliver.core.ports.FindProductByIdDao;
@@ -46,7 +47,7 @@ public class CreateNewOrderTest {
     }
 
     @Test
-    public void shouldCreateNewOrder() {
+    public void shouldCreateNewOrder() throws ProductNotFoundException {
         when(findProductByIdMock.findById(PRODUCT_ID)).thenReturn(Optional.of(PRODUCT));
         when(createNewOrderMock.create(order)).thenReturn(ORDER);
 
@@ -56,10 +57,16 @@ public class CreateNewOrderTest {
     }
     
     @Test(expected = ProductNotFoundException.class)
-    public void shouldThrowProductNotFoundException() {
-        when(findProductByIdMock.findById(INVALID_ID)).thenThrow(new ProductNotFoundException("Product not found"));
+    public void shouldThrowProductNotFoundException() throws ProductNotFoundException {        
+        when(findProductByIdMock.findById(INVALID_ID)).thenReturn(Optional.empty());
         
+        order = createNewOrderUseCase.create(ADDRESS, LATITUDE, LONGITUDE, INVALID_ORDER_PRODUCTS);
+    }
+    
+    @Test(expected = GenericException.class)
+    public void shouldThrowGenericException() throws ProductNotFoundException {
+        when(findProductByIdMock.findById(PRODUCT_ID)).thenThrow(new RuntimeException("Generic Exception"));
+
         order = createNewOrderUseCase.create(ADDRESS, LATITUDE, LONGITUDE, ORDER_PRODUCTS);
     }
-        
 }

@@ -1,9 +1,9 @@
 package com.devsuperior.dsdeliver.core.exceptions;
 
-public class ProductNotFoundException extends Exception {
+public class GenericException extends RuntimeException {
     private static final long serialVersionUID = 1L;
-
-    public ProductNotFoundException(String msg) {
+    
+    public GenericException(String msg) {
         super(msg);
     }
 }

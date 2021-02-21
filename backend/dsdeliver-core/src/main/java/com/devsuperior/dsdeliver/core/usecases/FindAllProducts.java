@@ -3,6 +3,7 @@ package com.devsuperior.dsdeliver.core.usecases;
 import java.util.List;
 
 import com.devsuperior.dsdeliver.core.entities.Product;
+import com.devsuperior.dsdeliver.core.exceptions.GenericException;
 import com.devsuperior.dsdeliver.core.ports.FindAllProductsDao;
 
 public class FindAllProducts {
@@ -14,6 +15,10 @@ public class FindAllProducts {
     }
 
     public List<Product> findAllByOrderByNameAsc() {
-        return findAllProductsDao.findAllByOrderByNameAsc();
+        try {
+            return findAllProductsDao.findAllByOrderByNameAsc();
+        } catch (Exception e) {
+            throw new GenericException("Unexpected Exception");
+        }
     }
 }

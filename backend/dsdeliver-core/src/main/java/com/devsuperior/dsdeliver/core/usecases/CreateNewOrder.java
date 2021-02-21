@@ -1,6 +1,5 @@
 package com.devsuperior.dsdeliver.core.usecases;
 
-import java.util.Optional;
 import java.util.Set;
 
 import com.devsuperior.dsdeliver.core.entities.Order;

@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.devsuperior.dsdeliver.core.entities.Product;
+import com.devsuperior.dsdeliver.core.exceptions.GenericException;
 import com.devsuperior.dsdeliver.core.ports.FindAllProductsDao;
 
 import org.junit.Before;
@@ -41,5 +42,11 @@ public class FindAllProductsTest {
         List<Product> products = findAllProductsUsecase.findAllByOrderByNameAsc();
         assertThat(products, is(PRODUCTS_LIST));
         assertEquals(3, products.size());
+    }
+
+    @Test(expected = GenericException.class)
+    public void shouldThrowGenericException() {
+        when(findAllProductsMock.findAllByOrderByNameAsc()).thenThrow(new RuntimeException("Generic Exception"));
+        findAllProductsUsecase.findAllByOrderByNameAsc();
     }
 }

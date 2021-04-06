@@ -1,4 +1,4 @@
-package com.devsuperior.dsdeliver.core.ports;
+package com.devsuperior.dsdeliver.core.ports.outbound;
 
 import java.util.Optional;
 

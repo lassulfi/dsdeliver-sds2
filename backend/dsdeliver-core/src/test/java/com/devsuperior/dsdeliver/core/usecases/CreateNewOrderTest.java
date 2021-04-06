@@ -13,8 +13,9 @@ import com.devsuperior.dsdeliver.core.entities.Order;
 import com.devsuperior.dsdeliver.core.entities.Product;
 import com.devsuperior.dsdeliver.core.exceptions.GenericException;
 import com.devsuperior.dsdeliver.core.exceptions.ProductNotFoundException;
-import com.devsuperior.dsdeliver.core.ports.CreateNewOrderDao;
-import com.devsuperior.dsdeliver.core.ports.FindProductByIdDao;
+import com.devsuperior.dsdeliver.core.ports.inbound.CreateNewOrder;
+import com.devsuperior.dsdeliver.core.ports.outbound.CreateNewOrderDao;
+import com.devsuperior.dsdeliver.core.ports.outbound.FindProductByIdDao;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -43,7 +44,7 @@ public class CreateNewOrderTest {
     public void setup() {
         findProductByIdMock = mock(FindProductByIdDao.class);
         createNewOrderMock = mock(CreateNewOrderDao.class);
-        createNewOrderUseCase = new CreateNewOrder(findProductByIdMock, createNewOrderMock);
+        createNewOrderUseCase = new CreateNewOrderImpl(findProductByIdMock, createNewOrderMock);
     }
 
     @Test

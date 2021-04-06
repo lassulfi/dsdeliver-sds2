@@ -2,13 +2,14 @@ package com.devsuperior.dsdeliver.core.usecases;
 
 import com.devsuperior.dsdeliver.core.entities.Product;
 import com.devsuperior.dsdeliver.core.exceptions.GenericException;
-import com.devsuperior.dsdeliver.core.ports.CreateProductDao;
+import com.devsuperior.dsdeliver.core.ports.inbound.CreateNewProduct;
+import com.devsuperior.dsdeliver.core.ports.outbound.CreateProductDao;
 
-public class CreateNewProduct {
+public class CreateNewProductImpl implements CreateNewProduct {
 
     private CreateProductDao createProductDao;
 
-    public CreateNewProduct(CreateProductDao createProductDao) {
+    public CreateNewProductImpl(CreateProductDao createProductDao) {
         this.createProductDao = createProductDao;
     }
     

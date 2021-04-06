@@ -7,15 +7,16 @@ import com.devsuperior.dsdeliver.core.entities.Product;
 import com.devsuperior.dsdeliver.core.exceptions.EntityNotFoundException;
 import com.devsuperior.dsdeliver.core.exceptions.GenericException;
 import com.devsuperior.dsdeliver.core.exceptions.ProductNotFoundException;
-import com.devsuperior.dsdeliver.core.ports.CreateNewOrderDao;
-import com.devsuperior.dsdeliver.core.ports.FindProductByIdDao;
+import com.devsuperior.dsdeliver.core.ports.outbound.FindProductByIdDao;
+import com.devsuperior.dsdeliver.core.ports.inbound.CreateNewOrder;
+import com.devsuperior.dsdeliver.core.ports.outbound.CreateNewOrderDao;
 
-public class CreateNewOrder {
+public class CreateNewOrderImpl implements CreateNewOrder {
     
     private FindProductByIdDao findProductByIdDao;
     private CreateNewOrderDao createNewOrderDao;
 
-    public CreateNewOrder(FindProductByIdDao findProductByIdDao, CreateNewOrderDao createNewOrderDao) {
+    public CreateNewOrderImpl(FindProductByIdDao findProductByIdDao, CreateNewOrderDao createNewOrderDao) {
         this.findProductByIdDao = findProductByIdDao;
         this.createNewOrderDao = createNewOrderDao;
     }

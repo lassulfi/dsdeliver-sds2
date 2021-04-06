@@ -36,13 +36,9 @@ public class ProductController {
 
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody ProductDTO dto) {
-		try {
-			dto.setId(id);
-			service.update(dto);
-			return ResponseEntity.noContent().build();
-		} catch (ObjectNotFoundException e) {
-			return ResponseEntity.notFound().build();
-		}
+		dto.setId(id);
+		service.update(dto);
+		return ResponseEntity.noContent().build();
 	}
 
 }

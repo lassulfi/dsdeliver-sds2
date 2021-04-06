@@ -4,13 +4,14 @@ import java.util.List;
 
 import com.devsuperior.dsdeliver.core.entities.Product;
 import com.devsuperior.dsdeliver.core.exceptions.GenericException;
-import com.devsuperior.dsdeliver.core.ports.FindAllProductsDao;
+import com.devsuperior.dsdeliver.core.ports.inbound.FindAllProducts;
+import com.devsuperior.dsdeliver.core.ports.outbound.FindAllProductsDao;
 
-public class FindAllProducts {
+public class FindAllProductsImpl implements FindAllProducts {
     
     private FindAllProductsDao findAllProductsDao;
 
-    public FindAllProducts(FindAllProductsDao findAllProductsDao) {
+    public FindAllProductsImpl(FindAllProductsDao findAllProductsDao) {
         this.findAllProductsDao = findAllProductsDao;
     }
 

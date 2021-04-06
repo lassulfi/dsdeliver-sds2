@@ -5,6 +5,8 @@ import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.devsuperior.dsdeliver.core.exceptions.OrderDeliveredException;
+
 // TODO: implement business logic https://www.baeldung.com/hexagonal-architecture-ddd-spring
 public class Order implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -84,6 +86,14 @@ public class Order implements Serializable {
         products.add(product);
     }
     
+    public void setDelivered() throws OrderDeliveredException {
+        if (this.getStatus() == OrderStatus.PENDING) {
+            this.setStatus(OrderStatus.DELIVERED);
+        } else {
+            throw new OrderDeliveredException("Order already delivered. Id: " + this.getId());
+        }
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;

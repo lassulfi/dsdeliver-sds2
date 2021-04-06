@@ -11,7 +11,8 @@ import java.util.List;
 
 import com.devsuperior.dsdeliver.core.entities.Product;
 import com.devsuperior.dsdeliver.core.exceptions.GenericException;
-import com.devsuperior.dsdeliver.core.ports.FindAllProductsDao;
+import com.devsuperior.dsdeliver.core.ports.inbound.FindAllProducts;
+import com.devsuperior.dsdeliver.core.ports.outbound.FindAllProductsDao;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -32,7 +33,7 @@ public class FindAllProductsTest {
     @Before
     public void setup() {
         findAllProductsMock = mock(FindAllProductsDao.class);
-        findAllProductsUsecase = new FindAllProducts(findAllProductsMock);
+        findAllProductsUsecase = new FindAllProductsImpl(findAllProductsMock);
     }
 
     @Test

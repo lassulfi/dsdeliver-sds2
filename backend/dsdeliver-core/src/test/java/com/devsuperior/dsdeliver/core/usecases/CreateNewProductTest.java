@@ -6,7 +6,8 @@ import static org.mockito.Mockito.when;
 
 import com.devsuperior.dsdeliver.core.entities.Product;
 import com.devsuperior.dsdeliver.core.exceptions.GenericException;
-import com.devsuperior.dsdeliver.core.ports.CreateProductDao;
+import com.devsuperior.dsdeliver.core.ports.inbound.CreateNewProduct;
+import com.devsuperior.dsdeliver.core.ports.outbound.CreateProductDao;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -30,7 +31,7 @@ public class CreateNewProductTest {
     @Before
     public void setup() {
         createProductDaoMock = mock(CreateProductDao.class);
-        createNewProductUseCase = new CreateNewProduct(createProductDaoMock);
+        createNewProductUseCase = new CreateNewProductImpl(createProductDaoMock);
     }
 
     @Test

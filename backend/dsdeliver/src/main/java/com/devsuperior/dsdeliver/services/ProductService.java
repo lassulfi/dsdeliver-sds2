@@ -33,13 +33,19 @@ public class ProductService {
 	}
 
 	@Transactional
-	public ProductDTO update(ProductDTO dto) throws ObjectNotFoundException {
-		Product entity = repository.findById(dto.getId()).orElseThrow(
-				() -> new ObjectNotFoundException("Entity not found: " + dto.getId() + " " + Product.class.getName()));
-		updateData(dto, entity);
-		entity = repository.save(entity);
-
-		return new ProductDTO(entity);
+	public void update(ProductDTO dto) {
+		try {
+			if (!repository.existsById(dto.getId())) {
+				throw new ObjectNotFoundException("Entidade não encontrada " + dto.getId() + " " + ProductDTO.class.getName());
+			}
+			Product entity = repository.findById(dto.getId()).get();
+			updateData(dto, entity);
+			repository.save(entity);
+		} catch (ObjectNotFoundException oex) {
+			throw oex;
+		} catch (Exception ex) {
+			throw ex;
+		}
 	}
 
 	private void updateData(ProductDTO dto, Product entity) {
